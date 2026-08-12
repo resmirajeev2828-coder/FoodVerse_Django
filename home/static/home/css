@@ -1,0 +1,63 @@
+body{
+    font-family: Arial, sans-serif;
+}
+
+.hero{
+    height:80vh;
+    background:url("https://images.unsplash.com/photo-1504674900247-0877df9cc836?w=1600") center/cover;
+}
+
+.hero h1{
+    font-size:60px;
+    font-weight:bold;
+}
+
+.hero p{
+    font-size:20px;
+}
+
+.card{
+    transition:0.3s;
+}
+
+.card:hover{
+    transform:scale(1.05);
+}
+
+footer{
+    margin-top:50px;
+}
+
+body{
+    background:#f8f9fa;
+}
+
+.navbar-brand{
+    font-size:28px;
+    font-weight:bold;
+}
+
+.card{
+    border:none;
+    border-radius:15px;
+    overflow:hidden;
+    box-shadow:0 5px 15px rgba(0,0,0,0.1);
+    transition:0.3s;
+}
+
+.card img{
+    height:220px;
+    object-fit:cover;
+}
+
+.card:hover{
+    transform:translateY(-8px);
+}
+
+.btn{
+    border-radius:30px;
+}
+
+footer{
+    margin-top:60px;
+}

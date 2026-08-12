@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Order History</title>
+</head>
+<body>
+
+<h2>My Orders</h2>
+
+{% if orders %}
+    <ul>
+    {% for order in orders %}
+        <li>
+            Order #{{ order.id }} -
+            {{ order.menu.name }} -
+            Qty: {{ order.quantity }} -
+            ₹{{ order.menu.price }}
+            {{ order.ordered_at }}
+        </li>
+    {% endfor %}
+    </ul>
+{% else %}
+    <p>No orders found.</p>
+{% endif %}
+
+<a href="/">Back to Home</a>
+
+</body>
+</html>

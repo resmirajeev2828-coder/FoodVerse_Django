@@ -1,0 +1,11 @@
+function addToCart() {
+    alert("Item added to cart successfully!");
+}
+
+function placeOrder() {
+    alert("Your order has been placed successfully!");
+}
+
+function loginSuccess() {
+    alert("Login Successful!");
+}
