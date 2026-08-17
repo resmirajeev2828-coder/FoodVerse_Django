@@ -4,116 +4,600 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>FoodVerse</title>
+
+    <title>FoodVerse | Delicious Food Near You</title>
 
     <!-- Bootstrap -->
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet">
 
-    <!-- CSS -->
+    <!-- Bootstrap Icons -->
+    <link rel="stylesheet"
+          href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.min.css">
+
+    <!-- Google Font -->
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600;700;800&display=swap"
+          rel="stylesheet">
+
+    <!-- Custom CSS -->
     <link rel="stylesheet" href="{% static 'home/css/style.css' %}">
+
+    <style>
+        * {
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Poppins', sans-serif;
+            background: #fffaf5;
+            color: #222;
+        }
+
+        /* NAVBAR */
+        .navbar {
+            padding: 15px 0;
+        }
+
+        .navbar-brand {
+            font-size: 24px;
+            letter-spacing: .3px;
+        }
+
+        .nav-link {
+            margin-left: 8px;
+            font-weight: 500;
+        }
+
+        .nav-link:hover {
+            color: #ffc107 !important;
+        }
+
+        /* HERO */
+        .hero {
+            min-height: 500px;
+            display: flex;
+            align-items: center;
+            position: relative;
+            overflow: hidden;
+
+            background:
+                linear-gradient(
+                    rgba(0, 0, 0, .62),
+                    rgba(0, 0, 0, .62)
+                ),
+                url("https://images.unsplash.com/photo-1504674900247-0877df9cc836?auto=format&fit=crop&w=1600&q=85");
+
+            background-size: cover;
+            background-position: center;
+        }
+
+        .hero-content {
+            max-width: 750px;
+            margin: auto;
+        }
+
+        .hero h1 {
+            font-size: clamp(40px, 6vw, 70px);
+            font-weight: 800;
+            line-height: 1.1;
+            margin-bottom: 20px;
+        }
+
+        .hero h1 span {
+            color: #ffc107;
+        }
+
+        .hero p {
+            font-size: 18px;
+            color: #f1f1f1;
+            max-width: 650px;
+            margin: 0 auto 25px;
+        }
+
+        .search-box {
+            max-width: 600px;
+            margin: 25px auto 0;
+        }
+
+        .search-box .form-control {
+            height: 55px;
+            border: none;
+            border-radius: 30px 0 0 30px;
+            padding-left: 22px;
+        }
+
+        .search-box .btn {
+            border-radius: 0 30px 30px 0;
+            padding: 0 25px;
+        }
+
+        /* SECTION */
+        .section-title {
+            font-weight: 700;
+        }
+
+        .section-subtitle {
+            color: #777;
+        }
+
+        /* RESTAURANT CARDS */
+        .restaurant-card {
+            border: none;
+            border-radius: 18px;
+            overflow: hidden;
+            background: white;
+            box-shadow: 0 8px 25px rgba(0,0,0,.08);
+            transition: .3s ease;
+            height: 100%;
+        }
+
+        .restaurant-card:hover {
+            transform: translateY(-8px);
+            box-shadow: 0 15px 35px rgba(0,0,0,.14);
+        }
+
+        .restaurant-card img {
+            height: 220px;
+            object-fit: cover;
+        }
+
+        .restaurant-card .card-body {
+            padding: 20px;
+        }
+
+        .restaurant-card h5 {
+            font-weight: 700;
+        }
+
+        .rating {
+            color: #f5a400;
+            font-weight: 600;
+        }
+
+        /* FEATURES */
+        .feature-box {
+            background: white;
+            border-radius: 18px;
+            padding: 30px 20px;
+            height: 100%;
+            box-shadow: 0 7px 22px rgba(0,0,0,.06);
+            transition: .3s;
+        }
+
+        .feature-box:hover {
+            transform: translateY(-5px);
+        }
+
+        .feature-icon {
+            width: 65px;
+            height: 65px;
+            margin: auto auto 15px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            background: #fff3cd;
+            color: #d99100;
+            font-size: 28px;
+        }
+
+        /* CTA */
+        .cta {
+            background: #212529;
+            border-radius: 25px;
+            padding: 55px 25px;
+            color: white;
+        }
+
+        .cta h2 {
+            font-weight: 700;
+        }
+
+        /* FOOTER */
+        footer {
+            margin-top: 70px;
+        }
+
+        @media (max-width: 768px) {
+            .hero {
+                min-height: 550px;
+            }
+
+            .hero h1 {
+                font-size: 42px;
+            }
+
+            .hero p {
+                font-size: 16px;
+            }
+
+            .search-box {
+                padding: 0 15px;
+            }
+        }
+    </style>
 </head>
+
 <body>
 
-<!-- Navbar -->
-<nav class="navbar navbar-expand-lg navbar-dark bg-dark">
-  <div class="container">
-    <a class="navbar-brand fw-bold" href="{% url 'home' %}">🍔 FoodVerse</a>
+<!-- ================= NAVBAR ================= -->
 
-    <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav">
-      <span class="navbar-toggler-icon"></span>
-    </button>
+<nav class="navbar navbar-expand-lg navbar-dark bg-dark sticky-top">
+    <div class="container">
 
-    <div class="collapse navbar-collapse" id="navbarNav">
-      <ul class="navbar-nav ms-auto">
-        <li class="nav-item">
-          <a class="nav-link" href="{% url 'home' %}">Home</a>
-        </li>
+        <a class="navbar-brand fw-bold" href="{% url 'home' %}">
+            🍔 FoodVerse
+        </a>
 
-        <li class="nav-item">
-          <a class="nav-link" href="{% url 'restaurants' %}">Restaurants</a>
-        </li>
+        <button class="navbar-toggler"
+                type="button"
+                data-bs-toggle="collapse"
+                data-bs-target="#navbarNav">
 
-        <li class="nav-item">
-          <a class="nav-link" href="{% url 'menu' %}">Menu</a>
-        </li>
+            <span class="navbar-toggler-icon"></span>
+        </button>
 
-        <li class="nav-item">
-          <a class="nav-link" href="{% url 'offers' %}">Offers</a>
-        </li>
+        <div class="collapse navbar-collapse" id="navbarNav">
 
-        <li class="nav-item">
-          <a class="nav-link" href="{% url 'cart' %}">Cart</a>
-        </li>
+            <ul class="navbar-nav ms-auto">
 
-        <li class="nav-item">
-          <a class="nav-link" href="{% url 'contact' %}">Contact</a>
-        </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="{% url 'home' %}">
+                        Home
+                    </a>
+                </li>
 
-        <li class="nav-item">
-          <a class="nav-link" href="{% url 'login' %}">Login</a>
-        </li>
-      </ul>
+                <li class="nav-item">
+                    <a class="nav-link" href="{% url 'restaurants' %}">
+                        Restaurants
+                    </a>
+                </li>
+
+                <li class="nav-item">
+                    <a class="nav-link" href="{% url 'menu' %}">
+                        Menu
+                    </a>
+                </li>
+
+                <li class="nav-item">
+                    <a class="nav-link" href="{% url 'offers' %}">
+                        Offers
+                    </a>
+                </li>
+
+                <li class="nav-item">
+                    <a class="nav-link" href="{% url 'cart' %}">
+                        <i class="bi bi-cart3"></i> Cart
+                    </a>
+                </li>
+
+                <li class="nav-item">
+                    <a class="nav-link" href="{% url 'contact' %}">
+                        Contact
+                    </a>
+                </li>
+
+                <li class="nav-item">
+                    <a class="nav-link" href="{% url 'login' %}">
+                        <i class="bi bi-person-circle"></i> Login
+                    </a>
+                </li>
+
+            </ul>
+
+        </div>
     </div>
-  </div>
 </nav>
 
-<!-- Hero Section -->
-<section class="hero text-center text-white d-flex align-items-center">
-    <div class="container">
-        <h1>Welcome to FoodVerse</h1>
-        <p>Discover the best restaurants and delicious food near you.</p>
 
-        <input type="text" class="form-control w-50 mx-auto" placeholder="Search food or restaurant">
+<!-- ================= HERO ================= -->
 
-        <a href="{% url 'restaurants' %}" class="btn btn-warning mt-3">Explore Restaurants</a>
+<section class="hero text-center text-white">
+
+    <div class="container hero-content">
+
+        <h1>
+            Welcome to <span>FoodVerse</span> 🍔
+        </h1>
+
+        <p>
+            Discover delicious food from the best restaurants around you.
+            Order your favourite meals quickly, easily and conveniently.
+        </p>
+
+        <div class="search-box d-flex">
+
+            <input type="text"
+                   class="form-control"
+                   placeholder="Search food or restaurant...">
+
+            <button class="btn btn-warning">
+                <i class="bi bi-search"></i>
+                Search
+            </button>
+
+        </div>
+
+        <a href="{% url 'restaurants' %}"
+           class="btn btn-warning btn-lg mt-4 px-4 fw-semibold">
+
+            <i class="bi bi-shop"></i>
+            Explore Restaurants
+
+        </a>
+
     </div>
+
 </section>
 
-<!-- Popular Restaurants -->
+
+<!-- ================= POPULAR RESTAURANTS ================= -->
+
+<section class="container my-5 py-4">
+
+    <div class="text-center mb-5">
+
+        <h2 class="section-title">
+            Popular Restaurants
+        </h2>
+
+        <p class="section-subtitle">
+            Taste something amazing from our favourite places
+        </p>
+
+    </div>
+
+    <div class="row g-4">
+
+        <!-- Burger House -->
+
+        <div class="col-md-4">
+
+            <div class="restaurant-card">
+
+                <img src="https://images.unsplash.com/photo-1568901346375-23c9450c58cd?auto=format&fit=crop&w=800&q=80"
+                     class="card-img-top"
+                     alt="Burger">
+
+                <div class="card-body">
+
+                    <h5>
+                        Burger House
+                    </h5>
+
+                    <p class="text-muted mb-2">
+                        Juicy burgers & tasty sides
+                    </p>
+
+                    <span class="rating">
+                        ⭐ 4.7
+                    </span>
+
+                    <span class="text-muted">
+                        · 30 mins
+                    </span>
+
+                </div>
+
+            </div>
+
+        </div>
+
+
+        <!-- Pizza World -->
+
+        <div class="col-md-4">
+
+            <div class="restaurant-card">
+
+                <img src="https://images.unsplash.com/photo-1579751626657-72bc17010498?auto=format&fit=crop&w=800&q=80"
+                     class="card-img-top"
+                     alt="Pizza">
+
+                <div class="card-body">
+
+                    <h5>
+                        Pizza World
+                    </h5>
+
+                    <p class="text-muted mb-2">
+                        Fresh & cheesy pizzas
+                    </p>
+
+                    <span class="rating">
+                        ⭐ 4.8
+                    </span>
+
+                    <span class="text-muted">
+                        · 25 mins
+                    </span>
+
+                </div>
+
+            </div>
+
+        </div>
+
+
+        <!-- Royal Biryani -->
+
+        <div class="col-md-4">
+
+            <div class="restaurant-card">
+
+                <img src="https://images.unsplash.com/photo-1589302168068-964664d93dc0?auto=format&fit=crop&w=800&q=80"
+                     class="card-img-top"
+                     alt="Biryani">
+
+                <div class="card-body">
+
+                    <h5>
+                        Royal Biryani
+                    </h5>
+
+                    <p class="text-muted mb-2">
+                        Authentic & delicious biryani
+                    </p>
+
+                    <span class="rating">
+                        ⭐ 4.9
+                    </span>
+
+                    <span class="text-muted">
+                        · 35 mins
+                    </span>
+
+                </div>
+
+            </div>
+
+        </div>
+
+    </div>
+
+</section>
+
+
+<!-- ================= WHY FOODVERSE ================= -->
+
+<section class="container my-5 py-4">
+
+    <div class="text-center mb-5">
+
+        <h2 class="section-title">
+            Why Choose FoodVerse?
+        </h2>
+
+        <p class="section-subtitle">
+            Everything you need for a delicious food experience
+        </p>
+
+    </div>
+
+    <div class="row g-4">
+
+        <div class="col-md-4">
+
+            <div class="feature-box text-center">
+
+                <div class="feature-icon">
+                    <i class="bi bi-shop"></i>
+                </div>
+
+                <h5 class="fw-bold">
+                    Best Restaurants
+                </h5>
+
+                <p class="text-muted mb-0">
+                    Explore amazing restaurants and discover your next favourite place.
+                </p>
+
+            </div>
+
+        </div>
+
+
+        <div class="col-md-4">
+
+            <div class="feature-box text-center">
+
+                <div class="feature-icon">
+                    <i class="bi bi-lightning-charge"></i>
+                </div>
+
+                <h5 class="fw-bold">
+                    Fast Delivery
+                </h5>
+
+                <p class="text-muted mb-0">
+                    Get your favourite meals delivered quickly and conveniently.
+                </p>
+
+            </div>
+
+        </div>
+
+
+        <div class="col-md-4">
+
+            <div class="feature-box text-center">
+
+                <div class="feature-icon">
+                    <i class="bi bi-heart-fill"></i>
+                </div>
+
+                <h5 class="fw-bold">
+                    Delicious Choices
+                </h5>
+
+                <p class="text-muted mb-0">
+                    From burgers and pizza to biryani, there is something for everyone.
+                </p>
+
+            </div>
+
+        </div>
+
+    </div>
+
+</section>
+
+
+<!-- ================= CTA ================= -->
+
 <section class="container my-5">
-    <h2 class="text-center mb-4">Popular Restaurants</h2>
 
-    <div class="row">
+    <div class="cta text-center">
 
-        <div class="col-md-4">
-            <div class="card">
-                <img src="https://images.unsplash.com/photo-1517248135467-4c7edcad34c4?w=600" class="card-img-top">
-                <div class="card-body">
-                    <h5>Burger House</h5>
-                    <p>⭐ 4.7 | 30 mins</p>
-                </div>
-            </div>
-        </div>
+        <h2>
+            Hungry? Let's get started! 🍽️
+        </h2>
 
-        <div class="col-md-4">
-            <div class="card">
-                <img src="https://images.unsplash.com/photo-1552566626-52f8b828add9?w=600" class="card-img-top">
-                <div class="card-body">
-                    <h5>Pizza World</h5>
-                    <p>⭐ 4.8 | 25 mins</p>
-                </div>
-            </div>
-        </div>
+        <p class="text-light mt-3">
+            Find your favourite restaurant and order something delicious today.
+        </p>
 
-        <div class="col-md-4">
-            <div class="card">
-                <img src="https://images.unsplash.com/photo-1504674900247-0877df9cc836?w=600" class="card-img-top">
-                <div class="card-body">
-                    <h5>Royal Biryani</h5>
-                    <p>⭐ 4.9 | 35 mins</p>
-                </div>
-            </div>
-        </div>
+        <a href="{% url 'restaurants' %}"
+           class="btn btn-warning btn-lg px-4 mt-2 fw-semibold">
+
+            Order Now
+            <i class="bi bi-arrow-right"></i>
+
+        </a>
 
     </div>
+
 </section>
 
-<!-- Footer -->
-<footer class="bg-dark text-white text-center p-3">
-    © 2026 FoodVerse. All Rights Reserved. 
+
+<!-- ================= FOOTER ================= -->
+
+<footer class="bg-dark text-white text-center p-4">
+
+    <div class="container">
+
+        <h5 class="fw-bold">
+            🍔 FoodVerse
+        </h5>
+
+        <p class="mb-2">
+            Delicious food. Happy moments.
+        </p>
+
+        <small>
+            © 2026 FoodVerse. All Rights Reserved.
+        </small>
+
+    </div>
+
 </footer>
 
+
+<!-- Bootstrap JS -->
+
 <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
+
+<!-- Custom JS -->
+
 <script src="{% static 'home/js/script.js' %}"></script>
 
 </body>
