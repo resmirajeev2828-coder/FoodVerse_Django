@@ -25,7 +25,7 @@ SECRET_KEY = 'django-insecure-313icmt!)bme@iz2-_6uv52zu#n5&i%rce#4kei^mox3k!u=l7
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
-ALLOWED_HOSTS = ["localhost", "127.0.0.1"]
+ALLOWED_HOSTS = ["foodverse-django.onrender.com"]
 
 CSRF_TRUSTED_ORIGINS = [
     "http://localhost:5173",
