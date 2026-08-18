@@ -25,7 +25,10 @@ SECRET_KEY = 'django-insecure-313icmt!)bme@iz2-_6uv52zu#n5&i%rce#4kei^mox3k!u=l7
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
-ALLOWED_HOSTS = ["foodverse-django.onrender.com"]
+ALLOWED_HOSTS = ["foodverse-django.onrender.com",
+                 "127.0.0.1",
+                 "localhost",
+                 ]
 
 CSRF_TRUSTED_ORIGINS = [
     "http://localhost:5173",
@@ -57,6 +60,8 @@ MIDDLEWARE = [
     'corsheaders.middleware.CorsMiddleware',
     
     'django.middleware.security.SecurityMiddleware',
+
+    'whitenoise.middleware.WhiteNoiseMiddleware',
 
     'django.contrib.sessions.middleware.SessionMiddleware',
     'django.middleware.common.CommonMiddleware',
