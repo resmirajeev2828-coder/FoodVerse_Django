@@ -28,11 +28,13 @@ DEBUG = True
 ALLOWED_HOSTS = ["foodverse-django.onrender.com",
                  "127.0.0.1",
                  "localhost",
+                  "https://food-verse-react-7mags5nm-resmirajeev2828-coders.vercel.app",
                  ]
 
 CSRF_TRUSTED_ORIGINS = [
     "http://localhost:5173",
     "http://127.0.0.1:5173",
+    "https://food-verse-react-7mags5nm-resmirajeev2828-coders.vercel.app",
 ]
 
 
